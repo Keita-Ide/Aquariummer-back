@@ -41,7 +41,7 @@ public class Aquarium implements Serializable{
 
 	public Aquarium() {
         this.aquariumName = "コリドラス水槽";
-        this.aquariumWater = "淡水";
+        this.aquariumWater = "汽水";
         this.aquariumSize = "45";
         this.aquariumWaterSize = "16";
         this.fishNamesNumbers = new ArrayList<AquariumFish>();
