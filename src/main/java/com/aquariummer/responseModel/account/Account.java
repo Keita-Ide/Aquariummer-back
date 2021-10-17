@@ -1,4 +1,4 @@
-package com.aquariummer.model.account;
+package com.aquariummer.responseModel.account;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

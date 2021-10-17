@@ -1,4 +1,4 @@
-package com.aquariummer.model.aquarium;
+package com.aquariummer.responseModel.aquarium;
 
 import java.io.Serializable;
 
