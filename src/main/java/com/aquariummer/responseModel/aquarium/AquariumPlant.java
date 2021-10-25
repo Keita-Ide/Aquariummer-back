@@ -7,23 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import lombok.Data;
 
 @Data
-public class AquariumFish implements Serializable{
+public class AquariumPlant implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
-    /** 魚ID **/
+    /** 植物ID **/
     @Autowired
-    private int fishId;
+    private int plantId;
 
-    /** 魚名 **/
+    /** 植物名 **/
     @Autowired
-    private String fishName;
+    private String plantName;
 
-    /** 魚マスタの情報 **/
+    /** 植物の学名 **/
     @Autowired
-    private String fishScientificName;
+    private String plantScientificName;
 
-    /** 魚数 **/
+    /** 植物数 **/
     @Autowired
-    private int fishNumber;
+    private int plantNumber;
 }

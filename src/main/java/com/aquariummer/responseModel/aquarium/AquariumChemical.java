@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import lombok.Data;
 
 @Data
-public class AquariumEquipment implements Serializable {
+public class AquariumChemical implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /** アクアリウム用品ID **/
+    /** 薬品ID **/
     @Autowired
-    private int equipmentId;
+    private int chemicalId;
 
-    /** アクアリウム用品名 **/
+    /** 薬品名 **/
     @Autowired
-    private String equipmentName;
+    private String chemicalName;
 
 }

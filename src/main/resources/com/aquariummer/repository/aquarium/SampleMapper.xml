@@ -7,7 +7,7 @@
 		<id property="companyId" column="company_id" />
 		<result property="companyName" column="company_name"/>
 	</resultMap>
-	<select id="search" resultMap="sampleResultMap">
-		SELECT company_id, company_name FROM company WHERE company_id = 1;
+	<select id="searchSample" resultMap="sampleResultMap">
+		SELECT company_id, company_name FROM company WHERE company_id = #{accountId};
 	</select>
 </mapper>

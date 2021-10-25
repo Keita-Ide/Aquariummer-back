@@ -14,5 +14,5 @@ public interface SampleMapper {
      * @param user 検索用リクエストデータ
      * @return ユーザー情報
      */
-    Sample search(SampleSearchRequest user);
+    Sample searchSample(SampleSearchRequest user);
 }

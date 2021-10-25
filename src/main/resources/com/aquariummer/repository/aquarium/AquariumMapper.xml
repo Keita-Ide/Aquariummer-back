@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aquariummer.repository.aquarium.AquariumMapper">
+	<resultMap id="serchAquariumResultMap" type="com.aquariummer.responseModel.aquarium.Aquarium">
+		<id property="aquariumId" column="aquarium_id" />
+		<result property="aquariumName" column="aquarium_name"/>
+		<result property="aquariumWaterType" column="aquarium_water_type"/>
+		<result property="aquariumWaterSize" column="aquarium_water_size"/>
+		<result property="aquariumSize" column="aquarium_size"/>
+		<result property="filterBodyId" column="filter_body_id"/>
+		<result property="filterBodyName" column="filter_body_name"/>
+		<result property="filterMediumId" column="filter_medium_id"/>
+		<result property="filterMediumName" column="filter_medium_name"/>
+		<result property="soilId" column="soil_id"/>
+		<result property="soilName" column="soil_name"/>
+		<result property="heaterId" column="heater_id"/>
+		<result property="heaterName" column="heater_name"/>
+		<result property="coolerId" column="cooler_id"/>
+		<result property="coolerName" column="cooler_name"/>
+		<result property="lightId" column="light_id"/>
+		<result property="lightName" column="light_name"/>
+		<result property="waterTemplatureGaugeId" column="water_templature_gauge_id"/>
+		<result property="waterTemplatureGaugeNmae" column="water_templature_gauge_name"/>
+		<result property="aerationId" column="aeration_id"/>
+		<result property="aerationName" column="aeration_name"/>
+		<result property="circurationpumpId" column="circurationpump_id"/>
+		<result property="circurationpumpName" column="circurationpump_name"/>
+		<collection property="aquariumFish" ofType="com.aquariummer.responseModel.aquarium.AquariumFish">
+			<id property="fishId" column="fish_id"/>
+			<result property="fishName" column="fish_name"/>
+			<result property="fishScientificName" column="fish_scientific_name"/>
+			<result property="fishNumber" column="fish_number"/>
+		</collection>
+		<collection property="aquariumPlant" ofType="com.aquariummer.responseModel.aquarium.AquariumPlant">
+			<id property="plantId" column="plant_id"/>
+			<result property="plantName" column="plant_name"/>
+			<result property="plantScientificName" column="plant_scientific_name"/>
+			<result property="plantNumber" column="plant_number"/>
+		</collection>
+		<collection property="aquariumEquipment" ofType="com.aquariummer.responseModel.aquarium.AquariumEquipment">
+			<id property="equipmentId" column="equipment_id"/>
+			<result property="equipmentName" column="equipment_name"/>
+		</collection>
+		<collection property="aquariumChemical" ofType="com.aquariummer.responseModel.aquarium.AquariumChemical">
+			<id property="chemicalId" column="chemical_id"/>
+			<result property="chemicalName" column="chemical_name"/>
+		</collection>
+	</resultMap>
+	<select id="getAquariumDetail" resultMap="serchAquariumResultMap">
+		SELECT
+			aqa.aquarium_id AS aquarium_id,
+			aqa.aquarium_name AS aquarium_name,
+			aqa.aquarium_water_type AS aquarium_water_type,
+			aqa.aquarium_water_size AS aquarium_water_size,
+			aqa.aquarium_size AS aquarium_size,
+			aqa.tank_id AS tank_id,
+			aqa.filter_body_id AS filter_body_id,
+			fbm.filter_body_name AS filter_body_name,
+			aqa.filter_medium_id AS filter_medium_id,
+			fmm.filter_medium_name AS filter_medium_name,
+			aqa.soil_id AS soil_id,
+			smr.soil_name AS soil_name,
+			aqa.heater_id AS heater_id,
+			hmr.heater_name AS heater_name,
+			aqa.cooler_id AS cooler_id,
+			clm.cooler_name AS cooler_name,
+			aqa.light_id AS light_id,
+			lmr.light_name AS light_name,
+			aqa.water_templature_gauge_id AS water_templature_gauge_id,
+			wtm.water_templature_gauge_name AS water_templature_gauge_name,
+			aqa.aeration_id AS aeration_id,
+			amr.aeration_name AS aeration_name,
+			aqa.circurationpump_id AS circurationpump_id,
+			cim.circurationpump_name AS circurationpump_name,
+			afh.fish_id AS fish_id,
+			afh.fish_number AS fish_number,
+			fmr.fish_name AS fish_name,
+			fmr.fish_scientific_name AS fish_scientific_name,
+			apt.plant_id AS plant_id,
+			apt.plant_number AS plant_number,
+			pmr.plant_name AS plant_name,
+			pmr.plant_scientific_name AS plant_scientific_name,
+			aeq.equipment_id AS equipment_id,
+			emr.equipment_name AS equipment_name,
+			ach.chemical_id AS chemical_id,
+			cmr.chemical_name AS chemical_name
+		FROM
+			aquarium aqa
+		LEFT JOIN aquarium_fish afh ON
+			aqa.aquarium_fish_id = afh.aquarium_fish_id
+		LEFT JOIN aquarium_plant apt ON
+			aqa.aquarium_plant_id = apt.aquarium_plant_id
+		LEFT JOIN aquarium_equipment aeq ON
+			aqa.aquarium_equipment_id = aeq.aquarium_equipment_id
+		LEFT JOIN aquarium_chemical ach ON
+			aqa.aquarium_chemical_id = ach.aquarium_chemical_id
+		INNER JOIN fish_master fmr ON
+			afh.fish_id = fmr.fish_id
+		INNER JOIN plant_master pmr ON
+			apt.plant_id = pmr.plant_id
+		INNER JOIN equipment_master emr ON
+			aeq.equipment_id = emr.equipment_id
+		INNER JOIN chemical_master cmr ON
+			ach.chemical_id = cmr.chemical_id
+		INNER JOIN tank_master tmr ON
+			aqa.tank_id = tmr.tank_id
+		INNER JOIN filter_body_master fbm ON
+			aqa.filter_body_id = fbm.filter_body_id
+		INNER JOIN filter_medium_master fmm ON
+			aqa.filter_medium_id = fmm.filter_medium_id
+		INNER JOIN soil_master smr ON
+			aqa.soil_id = smr.soil_id
+		INNER JOIN heater_master hmr ON
+			aqa.heater_id = hmr.heater_id
+		INNER JOIN cooler_master clm ON
+			aqa.cooler_id = clm.cooler_id
+		INNER JOIN light_master lmr ON
+			aqa.light_id = lmr.light_id
+		INNER JOIN water_templature_gauge_master wtm ON
+			aqa.water_templature_gauge_id = wtm.water_templature_gauge_id
+		INNER JOIN aeration_master amr ON
+			aqa.aeration_id = amr.aeration_id
+		INNER JOIN circurationpump_master cim ON
+			aqa.circurationpump_id = cim.circurationpump_id
+		WHERE
+			aqa.aquarium_id = #{aquariumId}
+	</select>
+</mapper>
